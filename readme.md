@@ -59,7 +59,6 @@
 - [Screenshots & UI Walkthrough](#-screenshots--ui-walkthrough)
 - [Roadmap](#-roadmap)
 - [Contributing](#-contributing)
-- [License](#-license)
 
 ---
 
