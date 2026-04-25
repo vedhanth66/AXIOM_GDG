@@ -61,7 +61,7 @@ function App() {
         {/* Theme toggle */}
         <motion.button
           onClick={toggleTheme}
-          className="fixed top-5 right-5 z-[100] p-3 rounded-full border backdrop-blur-md"
+          className="fixed top-5 right-5 z-100 p-3 rounded-full border backdrop-blur-md"
           style={{
             background: 'var(--theme-card-bg)',
             borderColor: 'var(--theme-border)',
