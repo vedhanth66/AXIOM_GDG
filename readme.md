@@ -30,7 +30,7 @@
 │                                                                 │
 │   ⚡  10,000 synthetic personas generated in seconds           │
 │   🔬  Counterfactual twin injection to expose hidden bias       │
-│   🌐  3D Bias Topology Map — live, interactive, breathtaking   │
+│   🌐  3D Bias Topology Map live, interactive, breathtaking   │
 │   🤖  LLM-powered verdict + remediation code generation        │
 │   🎨  Dark/Light theme with glass-morphism design system       │
 │                                                                 │
@@ -45,7 +45,7 @@
 
 - [What is AXIOM?](#-what-is-axiom)
 - [The Problem We Solve](#-the-problem-we-solve)
-- [How It Works — The Science](#-how-it-works--the-science)
+- [How It Works The Science](#-how-it-works--the-science)
 - [Architecture Overview](#-architecture-overview)
 - [Feature Deep-Dive](#-feature-deep-dive)
 - [Tech Stack](#-tech-stack)
@@ -65,9 +65,9 @@
 
 ## 🧠 What is AXIOM?
 
-**AXIOM** is an end-to-end AI fairness auditing platform that uses **counterfactual twin injection** to expose hidden discrimination inside black-box AI decision-making systems. Unlike traditional bias audits that merely inspect training data statistics, AXIOM *actively probes* a model by creating demographic clones — personas that are **identical in every way except one protected attribute** — then measures outcome deltas.
+**AXIOM** is an end-to-end AI fairness auditing platform that uses **counterfactual twin injection** to expose hidden discrimination inside black-box AI decision-making systems. Unlike traditional bias audits that merely inspect training data statistics, AXIOM *actively probes* a model by creating demographic clones personas that are **identical in every way except one protected attribute** then measures outcome deltas.
 
-The result: irrefutable, causal evidence of discriminatory behaviour, presented through a jaw-dropping **3D Bias Topology Map**, an LLM-generated executive verdict, a first-person impact portrait, and actionable remediation code — all in a single seamless experience.
+The result: irrefutable, causal evidence of discriminatory behaviour, presented through a jaw-dropping **3D Bias Topology Map**, an LLM-generated executive verdict, a first-person impact portrait, and actionable remediation code all in a single seamless experience.
 
 ### Who is it for?
 
@@ -83,13 +83,13 @@ The result: irrefutable, causal evidence of discriminatory behaviour, presented 
 
 ## 🔴 The Problem We Solve
 
-Modern AI systems make high-stakes decisions about who gets hired, who receives a loan, and who gets recommended medical treatment. These systems routinely encode and amplify historical societal biases — but proving this is **fiendishly hard**.
+Modern AI systems make high-stakes decisions about who gets hired, who receives a loan, and who gets recommended medical treatment. These systems routinely encode and amplify historical societal biases but proving this is **fiendishly hard**.
 
 Traditional approaches fail because:
 
 ```
 ❌  Correlation ≠ Causation  
-    "The model uses zip code, not race" — but zip code proxies race.
+    "The model uses zip code, not race" but zip code proxies race.
 
 ❌  Aggregate statistics miss intersectionality  
     A model may be fair to Black men and fair to women overall,
@@ -114,9 +114,9 @@ Traditional approaches fail because:
 
 ---
 
-## 🔬 How It Works — The Science
+## 🔬 How It Works The Science
 
-### Step 1 — Persona Factory
+### Step 1 Persona Factory
 
 AXIOM generates **10,000 synthetic human personas** with realistic, US-census-calibrated demographic distributions.
 
@@ -143,9 +143,9 @@ Domain: HIRING
 └── has_employment_gap  ← Bernoulli(0.22)
 ```
 
-### Step 2 — Counterfactual Twin Injection
+### Step 2 Counterfactual Twin Injection
 
-For each sampled persona, AXIOM creates **demographic clones** — identical twins that differ in exactly **one** protected attribute. This is the core innovation.
+For each sampled persona, AXIOM creates **demographic clones** identical twins that differ in exactly **one** protected attribute. This is the core innovation.
 
 ```
 Original Persona P:
@@ -164,9 +164,9 @@ Twin P₃: race="asian",    all else IDENTICAL
 Twin P₄: race="other",    all else IDENTICAL
 ```
 
-The model is queried with each twin. The **outcome difference is the discrimination**. There is no confounding variable — the only thing that changed was the protected attribute.
+The model is queried with each twin. The **outcome difference is the discrimination**. There is no confounding variable the only thing that changed was the protected attribute.
 
-### Step 3 — Disparity Computation
+### Step 3 Disparity Computation
 
 Three fairness metrics are computed per protected attribute group:
 
@@ -185,23 +185,23 @@ Three fairness metrics are computed per protected attribute group:
    Ideal: CFS = 1.0 (100%)
 ```
 
-### Step 4 — LLM Explanation Engine
+### Step 4 LLM Explanation Engine
 
 Results are passed to an LLM (Groq/Llama-3.1-8b) with a structured three-part prompt that generates:
 
 ```
-SECTION 1 — VERDICT (for executives)
+SECTION 1 VERDICT (for executives)
    Plain-English, no jargon, specific harm description.
 
-SECTION 2 — TECHNICAL REMEDIATION (for engineers)
+SECTION 2 TECHNICAL REMEDIATION (for engineers)
    4-6 ranked interventions with AIF360/Fairlearn function names.
 
-SECTION 3 — IMPACT PORTRAIT (for the public)
+SECTION 3 IMPACT PORTRAIT (for the public)
    First-person 150-word narrative from the most-disadvantaged
    demographic group's perspective.
 ```
 
-### Step 5 — Bias Topology Map
+### Step 5 Bias Topology Map
 
 All disparity data is projected into 3D space:
 
@@ -284,8 +284,8 @@ The entry point of AXIOM. A cinematic landing screen with:
 
 - **Animated hero heading** with italic accent on "X" in AXIOM
 - **Drag-and-drop data zone** (COMPAS demo dataset pre-loaded)
-- **Domain selector** — Hiring, Lending, or Healthcare, each with its own accent colour and icon
-- **Protected attributes display** — Race (purple), Gender (rose), Age Group (mint)
+- **Domain selector** Hiring, Lending, or Healthcare, each with its own accent colour and icon
+- **Protected attributes display** Race (purple), Gender (rose), Age Group (mint)
 - **Ambient radial gradient orb** in the background for depth
 - **Spring-physics button animations** via Framer Motion
 
@@ -293,16 +293,16 @@ The entry point of AXIOM. A cinematic landing screen with:
 
 A real-time audit dashboard that makes the waiting feel like watching a rocket launch:
 
-- **Animated SVG progress ring** — smooth stroke-dash animation
-- **Live persona counter** — counts up to 10,000 in real-time
-- **Decision flip counter** — increments as counterfactual flips are detected
+- **Animated SVG progress ring** smooth stroke-dash animation
+- **Live persona counter** counts up to 10,000 in real-time
+- **Decision flip counter** increments as counterfactual flips are detected
 - **Stage checklist** with animated timeline dots and checkmarks
 - **Server-Sent Events (SSE)** for real-time progress without polling overhead
 - The entire pipeline has **fake dramatic delays** for demo theatrics
 
 ### 🌐 3D Bias Topology Map
 
-The centrepiece of AXIOM — a fully interactive WebGL scene:
+The centrepiece of AXIOM a fully interactive WebGL scene:
 
 ```
 Severity → Colour Mapping:
@@ -323,7 +323,7 @@ Spike height = abs(group_rate - reference_rate) × 15
 - **Group labels** rendered as 3D text above critical spikes
 - **Ground glow planes** beneath each spike (subtle opacity)
 - **Environment preset** from `@react-three/drei` for realistic lighting
-- **Theme-aware** — switches between black and near-white ground
+- **Theme-aware** switches between black and near-white ground
 
 ### 📊 Verdict Dashboard
 
@@ -355,7 +355,7 @@ An interactive code generation environment:
 
 - **Checklist of 4-6 remediation steps** extracted from LLM output
 - **Click any step** to trigger live code generation
-- **Typewriter animation** — code appears character by character at 10ms intervals
+- **Typewriter animation** code appears character by character at 10ms intervals
 - **Animated blinking cursor** while generating
 - **Pulse indicator** (ping animation) in the terminal header
 - **AIF360/Fairlearn-specific code** with inline comments
@@ -541,7 +541,7 @@ Add your Groq API key to `.env`:
 GROQ_API_KEY=gsk_your_groq_api_key_here
 ```
 
-> **Note:** AXIOM works without a Groq API key — it falls back to pre-written example outputs for the verdict, remediation steps, impact portrait, and code snippets. The 3D map and all metrics still function perfectly.
+> **Note:** AXIOM works without a Groq API key it falls back to pre-written example outputs for the verdict, remediation steps, impact portrait, and code snippets. The 3D map and all metrics still function perfectly.
 
 Start the backend server:
 
@@ -1065,7 +1065,7 @@ Legal threshold: ≥ 0.80 (the "4/5ths rule")
 Example: 47% / 72% = 0.65 → FAILS legal threshold → "high" severity
 ```
 
-### Counterfactual Fairness Score (CFS) — AXIOM's Novel Metric
+### Counterfactual Fairness Score (CFS) AXIOM's Novel Metric
 
 Measures how often changing ONLY a protected attribute changes the model's decision.
 
@@ -1073,7 +1073,7 @@ Measures how often changing ONLY a protected attribute changes the model's decis
 CFS = 1 - E_persona[P(f(x_clone) ≠ f(x_original) | clone differs only in protected attr)]
 
 Range: [0, 1] expressed as percentage
-Ideal: 1.0 (100%) — the protected attribute never changes the outcome
+Ideal: 1.0 (100%) the protected attribute never changes the outcome
 Example: 73.4% means 26.6% of the time, merely changing race flips the decision
 ```
 
@@ -1178,7 +1178,7 @@ Note: Each increase of 100 samples ≈ +10% computation time.
 
 ## 🖼 Screenshots & UI Walkthrough
 
-### Screen 1 — Upload Portal
+### Screen 1 Upload Portal
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
@@ -1205,7 +1205,7 @@ Note: Each increase of 100 samples ≈ +10% computation time.
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
-### Screen 2 — Audit Pulse
+### Screen 2 Audit Pulse
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
@@ -1221,7 +1221,7 @@ Note: Each increase of 100 samples ≈ +10% computation time.
 ║        Personas       Decision Flips                        ║
 ║                                                              ║
 ║  • ✓ Generating 10,000 synthetic human personas             ║
-║  • ✓ Running adversarial simulation — probing model         ║
+║  • ✓ Running adversarial simulation probing model         ║
 ║  • ◉ Computing fairness metrics across all groups           ║
 ║  • ○ Gemini analyzing patterns and drafting verdict         ║
 ║  • ○ Building bias topology map                             ║
@@ -1230,7 +1230,7 @@ Note: Each increase of 100 samples ≈ +10% computation time.
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
-### Screen 3 — 3D Bias Topology Map
+### Screen 3 3D Bias Topology Map
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
@@ -1249,7 +1249,7 @@ Note: Each increase of 100 samples ≈ +10% computation time.
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
-### Screen 4 — Verdict Dashboard
+### Screen 4 Verdict Dashboard
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
@@ -1278,7 +1278,7 @@ Note: Each increase of 100 samples ≈ +10% computation time.
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
-### Screen 5 — Remediation Lab
+### Screen 5 Remediation Lab
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
@@ -1307,23 +1307,23 @@ Note: Each increase of 100 samples ≈ +10% computation time.
 
 ## 🗺 Roadmap
 
-### v1.1 — Real Model Integration
+### v1.1 Real Model Integration
 - [ ] Live HTTP endpoint probing (replace mock model)
 - [ ] CSV upload parsing to create custom personas
 - [ ] Support for multi-class outcomes (beyond binary)
 
-### v1.2 — Enhanced Analytics
+### v1.2 Enhanced Analytics
 - [ ] Intersectional analysis (race × gender heatmap)
 - [ ] Temporal bias tracking (how bias changes across model versions)
 - [ ] Confidence interval reporting on all metrics
 
-### v1.3 — Enterprise Features
+### v1.3 Enterprise Features
 - [ ] PostgreSQL persistent session storage
 - [ ] Audit report PDF export
 - [ ] Team collaboration with shared audit history
 - [ ] Scheduled automated audit runs
 
-### v2.0 — Platform
+### v2.0 Platform
 - [ ] Plugin system for custom domain schemas
 - [ ] API key management for external model connections
 - [ ] Compliance report templates (GDPR, EU AI Act, EEOC)
@@ -1423,10 +1423,10 @@ SOFTWARE.
 ## 🙏 Acknowledgements
 
 - **Groq** for blazing-fast Llama-3.1 inference that makes live code generation feel instant
-- **IBM AIF360** and **Microsoft Fairlearn** — the fairness metric frameworks that AXIOM's remediation advice references
+- **IBM AIF360** and **Microsoft Fairlearn** the fairness metric frameworks that AXIOM's remediation advice references
 - **Three.js** and **@react-three/fiber** for making interactive 3D in the browser actually achievable
 - **Framer Motion** for the silky-smooth animations that make the app feel alive
-- **DM Serif Display**, **Plus Jakarta Sans**, and **JetBrains Mono** from Google Fonts — the typographic soul of AXIOM
+- **DM Serif Display**, **Plus Jakarta Sans**, and **JetBrains Mono** from Google Fonts the typographic soul of AXIOM
 
 ---
 
