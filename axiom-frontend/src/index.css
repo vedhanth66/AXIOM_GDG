@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --color-axiom-bg: #030014;
+  --color-axiom-surface: rgba(20, 20, 35, 0.4);
+  --color-axiom-surface-hover: rgba(30, 30, 50, 0.6);
+  --color-axiom-border: rgba(100, 100, 255, 0.1);
+  --color-axiom-border-glow: rgba(138, 43, 226, 0.5);
+
+  --color-critical: #ef4444;
+  --color-high: #f97316;
+  --color-moderate: #eab308;
+  --color-low: #22c55e;
+}
+
+body {
+  background-color: var(--color-axiom-bg);
+  color: white;
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--color-axiom-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-axiom-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.glass-panel-glow:hover {
+  border-color: var(--color-axiom-border-glow);
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Custom Scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
