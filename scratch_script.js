@@ -3,7 +3,6 @@ const path = require('path');
 
 const projectDir = 'd:/Vedhanth/studies/Coding/Hackathon/GDG/axiom-frontend/src';
 
-// Helper to replace content
 function replaceInFile(filePath, replacements) {
     const fullPath = path.join(projectDir, filePath);
     if (!fs.existsSync(fullPath)) return;
@@ -18,7 +17,6 @@ function replaceInFile(filePath, replacements) {
     fs.writeFileSync(fullPath, content);
 }
 
-// Global replacements
 const globalReplacements = [
     ['text-purple-400', 'text-iris'],
     ['text-purple-500', 'text-iris-deep'],
@@ -61,11 +59,9 @@ function applyGlobals(filePath) {
     fs.writeFileSync(fullPath, content);
 }
 
-// Apply globals first
 ['App.tsx', 'components/UploadPortal.tsx', 'components/AuditPulse.tsx', 'components/BiasTopologyMap.tsx', 'components/VerdictDashboard.tsx', 'components/RemediationLab.tsx'].forEach(applyGlobals);
 
 
-// --- UPLOAD PORTAL SPECIFICS ---
 replaceInFile('components/UploadPortal.tsx', [
     ['w-[800px] h-[800px] bg-purple-900/20 rounded-full blur-[120px]', 'bg-[radial-gradient(ellipse,rgba(196,168,245,0.05),transparent_60%)] w-[600px] h-[600px] absolute bottom-right'],
     ['bg-linear-to-r from-purple-400 to-indigo-400 text-transparent bg-clip-text', 'text-text-primary'],
@@ -81,7 +77,7 @@ replaceInFile('components/UploadPortal.tsx', [
     ['bg-[#86C89E]', 'bg-mint'],
     ['<h3 className="text-xl font-medium mb-4 flex items-center gap-2">', '<h3 className="mb-4 flex items-center gap-2" style={{fontFamily: "\'DM Serif Display\', serif", fontWeight: "normal", fontSize: "18px"}}>'],
     ['text-indigo-400', 'text-iris'],
-    // Domain buttons logic... Let's just rewrite that part safely
+
     [`domain === d.id
                         ? 'border-iris/30 bg-iris/30/20 text-text-primary '
                         : 'border-white/10 bg-white/5 text-text-2 hover:bg-white/10'`, `domain === d.id ? 'bg-axiom-surface-2 border-iris/40 text-text-primary' : 'bg-transparent border-axiom-border text-text-3 hover:border-axiom-border-2 hover:text-text-2'`],
@@ -108,17 +104,16 @@ replaceInFile('components/UploadPortal.tsx', [
     ['border-white/30 border-t-white', 'border-black/20 border-t-black']
 ]);
 
-// --- AUDIT PULSE SPECIFICS ---
 replaceInFile('components/AuditPulse.tsx', [
     ['from-indigo-900/20 via-black to-black', 'bg-black'],
-    ['stroke="#a855f7" // Purple-500', 'stroke="var(--theme-iris)"'],
+    ['stroke="#a855f7" 
     ['rgba(255,255,255,0.05)', '#1A1A1A'],
     ['text-5xl font-light text-text-primary', 'text-[48px] text-text-primary" style={{fontFamily:"\'DM Serif Display\', serif"}}'],
     ['text-xs text-iris mt-1 uppercase tracking-widest', 'text-[11px] text-text-4 font-mono uppercase tracking-[0.2em] mt-1'],
     ['text-4xl font-mono text-iris font-light tracking-tight', 'text-[40px] text-iris tracking-tight" style={{fontFamily:"\'DM Serif Display\', serif"}}'],
     ['text-4xl font-mono text-rose font-light tracking-tight', 'text-[40px] text-rose tracking-tight" style={{fontFamily:"\'DM Serif Display\', serif"}}'],
     ['text-xs text-text-3 mt-2 uppercase tracking-wider', 'text-[9px] text-text-4 font-mono uppercase tracking-[0.18em] mt-2'],
-    ['bg-white/10', 'bg-axiom-surface-2'], // timeline line
+    ['bg-white/10', 'bg-axiom-surface-2'], 
     ['bg-purple-500 ', 'bg-iris '],
     ['bg-green-500', 'bg-mint'],
     ['bg-white/20', 'bg-axiom-surface'],

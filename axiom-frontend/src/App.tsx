@@ -58,7 +58,6 @@ function App() {
       <div className="min-h-screen bg-axiom-bg text-text-primary overflow-hidden selection:bg-iris/20 selection:text-iris relative">
         <div className="dot-grid" />
 
-        {/* Theme toggle */}
         <motion.button
           onClick={toggleTheme}
           className="fixed top-5 right-5 z-100 p-3 rounded-full border backdrop-blur-md"

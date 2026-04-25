@@ -57,7 +57,7 @@ export function AuditPulse({ sessionId, onComplete }: { sessionId: string; onCom
       transition={{ duration: 0.5 }}
       className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden"
     >
-      {/* Progress ring */}
+      
       <motion.div
         className="relative mb-14"
         style={{ width: 260, height: 260 }}
@@ -99,7 +99,6 @@ export function AuditPulse({ sessionId, onComplete }: { sessionId: string; onCom
         </div>
       </motion.div>
 
-      {/* Live counters */}
       <motion.div
         className="grid grid-cols-2 gap-16 mb-16 text-center"
         initial={{ opacity: 0, y: 15 }}
@@ -124,7 +123,6 @@ export function AuditPulse({ sessionId, onComplete }: { sessionId: string; onCom
         </div>
       </motion.div>
 
-      {/* Stage list */}
       <motion.div
         className="w-full max-w-md space-y-2.5 relative"
         initial={{ opacity: 0, y: 15 }}
@@ -149,7 +147,7 @@ export function AuditPulse({ sessionId, onComplete }: { sessionId: string; onCom
               transition={{ duration: 0.3 }}
               className="relative flex items-center gap-4"
             >
-              {/* Timeline dot */}
+              
               <div
                 className="absolute w-[7px] h-[7px] rounded-full"
                 style={{

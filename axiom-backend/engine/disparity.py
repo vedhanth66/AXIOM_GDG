@@ -1,18 +1,7 @@
-"""
-Computes fairness metrics across demographic groups.
-Returns structured results for the topology map renderer.
-"""
 import pandas as pd
 import numpy as np
 
 def compute_disparity_scores(results_df: pd.DataFrame, protected_attr: str) -> dict:
-    """
-    Computes:
-    - Statistical parity difference (demographic parity)
-    - Disparate impact ratio
-    - Counterfactual fairness score (our custom metric)
-    Returns per-group scores and pairwise comparisons.
-    """
     groups = results_df[protected_attr].unique()
     group_rates = {}
 
@@ -21,7 +10,6 @@ def compute_disparity_scores(results_df: pd.DataFrame, protected_attr: str) -> d
         positive_rate = group_data["outcome"].mean()
         group_rates[group] = round(float(positive_rate), 4)
 
-    # Reference group (most favorable outcome rate)
     max_group = max(group_rates, key=group_rates.get)
     max_rate = group_rates[max_group]
 
@@ -36,8 +24,6 @@ def compute_disparity_scores(results_df: pd.DataFrame, protected_attr: str) -> d
             "passes_4_5ths_rule": (rate / max_rate >= 0.8) if max_rate > 0 else True,
         }
 
-    # Counterfactual fairness score (AXIOM's proprietary metric)
-    # Measures how often ONLY changing the protected attribute flips the decision
     twin_pairs = results_df[results_df["twin_of"].notna()]
     if len(twin_pairs) > 0:
         flip_rates = {}

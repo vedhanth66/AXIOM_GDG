@@ -106,7 +106,7 @@ export function BiasTopologyMap({ topologyData }: any) {
         border: `1px solid var(--theme-border)`,
       }}
     >
-      {/* Header */}
+      
       <div className="absolute top-6 left-6 z-10 pointer-events-none">
         <h2
           className="text-text-primary"
@@ -120,7 +120,6 @@ export function BiasTopologyMap({ topologyData }: any) {
         </p>
       </div>
 
-      {/* Legend */}
       <div
         className="absolute bottom-6 right-6 z-10 p-3 rounded-lg flex flex-col gap-2 pointer-events-none"
         style={{ background: "var(--theme-surface)", border: "1px solid var(--theme-border)" }}
@@ -135,7 +134,6 @@ export function BiasTopologyMap({ topologyData }: any) {
         ))}
       </div>
 
-      {/* Tooltip */}
       {tooltip && (
         <div
           className="absolute z-20 p-4 rounded-xl pointer-events-none"

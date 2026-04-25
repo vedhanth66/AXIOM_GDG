@@ -69,7 +69,7 @@ export function RemediationLab({ explanation }: { explanation: any }) {
       </motion.header>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 flex-1">
-        {/* Left: Fix Checklist */}
+        
         <motion.div
           className="glass-panel rounded-3xl p-8 flex flex-col gap-3"
           initial={{ opacity: 0, x: -20 }}
@@ -136,7 +136,6 @@ export function RemediationLab({ explanation }: { explanation: any }) {
           })}
         </motion.div>
 
-        {/* Right: Code Generator */}
         <motion.div
           className="glass-panel rounded-3xl overflow-hidden flex flex-col relative"
           initial={{ opacity: 0, x: 20 }}

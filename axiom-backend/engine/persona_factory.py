@@ -1,8 +1,3 @@
-"""
-Generates 10,000 synthetic human personas with realistic intersectional
-demographic distributions for a given domain (hiring, lending, healthcare).
-Uses domain-specific feature schemas so that personas are semantically valid.
-"""
 import numpy as np
 import pandas as pd
 from dataclasses import dataclass
@@ -49,14 +44,12 @@ def generate_personas(domain: str, n: int = 10000, seed: int = 42) -> pd.DataFra
         
     data = {}
 
-    # Protected attributes — drawn from realistic US distributions
     data["race"] = np.random.choice(RACE_DIST, n, p=RACE_PROBS)
     data["gender"] = np.random.choice(GENDER_DIST, n, p=GENDER_PROBS)
     ages = np.clip(np.random.normal(38, 12, n).astype(int), 18, 70)
     data["age"] = ages
     data["age_group"] = [age_to_group(a) for a in ages]
 
-    # Domain-specific correlated features (simplified illustration)
     if domain == "hiring":
         data["years_experience"] = np.clip(
             (data["age"] - 22) + np.random.normal(0, 3, n), 0, 40

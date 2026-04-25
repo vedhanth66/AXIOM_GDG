@@ -34,7 +34,7 @@ export function UploadPortal({ onStart }: { onStart: (domain: string) => void })
       transition={{ duration: 0.5 }}
       className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden"
     >
-      {/* Ambient orb */}
+      
       <div
         className="absolute bottom-0 right-0 w-[700px] h-[700px] pointer-events-none -z-10 opacity-60"
         style={{
@@ -43,7 +43,6 @@ export function UploadPortal({ onStart }: { onStart: (domain: string) => void })
         }}
       />
 
-      {/* Hero */}
       <motion.div
         className="text-center mb-14"
         initial={{ opacity: 0, y: 20 }}
@@ -68,7 +67,6 @@ export function UploadPortal({ onStart }: { onStart: (domain: string) => void })
         </p>
       </motion.div>
 
-      {/* Main card */}
       <motion.div
         className="glass-panel rounded-3xl p-8 w-full max-w-4xl relative"
         initial={{ opacity: 0, y: 30, scale: 0.97 }}
@@ -76,7 +74,7 @@ export function UploadPortal({ onStart }: { onStart: (domain: string) => void })
         transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {/* Left: Upload zone */}
+          
           <motion.div
             className="border border-dashed rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer group"
             style={{
@@ -110,7 +108,6 @@ export function UploadPortal({ onStart }: { onStart: (domain: string) => void })
             </div>
           </motion.div>
 
-          {/* Right: Config */}
           <div className="flex flex-col justify-between">
             <div>
               <h3
@@ -121,7 +118,6 @@ export function UploadPortal({ onStart }: { onStart: (domain: string) => void })
                 Audit Configuration
               </h3>
 
-              {/* Domain selector */}
               <div className="space-y-2.5 mb-8">
                 {domainOptions.map((d) => {
                   const Icon = d.icon;
@@ -152,7 +148,6 @@ export function UploadPortal({ onStart }: { onStart: (domain: string) => void })
                 })}
               </div>
 
-              {/* Protected attributes */}
               <div className="mb-6">
                 <p
                   className="text-text-4 uppercase mb-2.5"
@@ -181,7 +176,6 @@ export function UploadPortal({ onStart }: { onStart: (domain: string) => void })
               </div>
             </div>
 
-            {/* CTA button */}
             <motion.button
               onClick={handleStart}
               disabled={isLoading}

@@ -25,7 +25,6 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-# In-memory session store (replaces Firestore for hackathon speed/reliability)
 sessions: Dict[str, Dict[str, Any]] = {}
 
 @app.post("/api/audit/start")
@@ -43,17 +42,15 @@ async def start_audit(
         "stage_label": "Initializing AXIOM engine..."
     }
 
-    # Kick off async audit pipeline
     background_tasks.add_task(run_full_audit_pipeline, session_id, domain)
     
     return {"session_id": session_id, "status": "processing"}
-
 
 @app.get("/api/audit/{session_id}/stream")
 async def stream_audit_progress(session_id: str):
     async def event_generator():
         prev_progress = -1
-        timeout = 300  # 5 min max
+        timeout = 300  
         elapsed = 0
         
         while elapsed < timeout:
@@ -79,7 +76,6 @@ async def stream_audit_progress(session_id: str):
             
     return EventSourceResponse(event_generator())
 
-
 @app.get("/api/audit/{session_id}/results")
 async def get_audit_results(session_id: str):
     data = sessions.get(session_id)
@@ -92,16 +88,14 @@ async def get_remediation_code(finding: str = Form(...), approach: str = Form(..
     code = await generate_code_fix(finding, approach)
     return {"code": code}
 
-
 async def run_full_audit_pipeline(session_id: str, domain: str):
     try:
-        # Stage 1: Generate personas
+        
         sessions[session_id].update({"status": "generating_personas", "progress": 10,
                      "stage_label": "Generating 10,000 synthetic personas..."})
-        await asyncio.sleep(1) # Fake delay for drama
+        await asyncio.sleep(1) 
         personas = generate_personas(domain, n=10000)
-        
-        # Stage 2: Create counterfactual twins + probe model
+
         sessions[session_id].update({"status": "probing_model", "progress": 30,
                      "stage_label": "Running adversarial simulation..."})
         await asyncio.sleep(1.5)
@@ -111,8 +105,7 @@ async def run_full_audit_pipeline(session_id: str, domain: str):
             cf_results[attr] = run_counterfactual_experiment(
                 personas, attr, sample_size=500
             )
-        
-        # Stage 3: Compute disparity scores
+
         sessions[session_id].update({"status": "computing_disparities", "progress": 55,
                      "stage_label": "Computing fairness metrics..."})
         await asyncio.sleep(1)
@@ -120,21 +113,18 @@ async def run_full_audit_pipeline(session_id: str, domain: str):
         disparity_results = {}
         for attr, results_df in cf_results.items():
             disparity_results[attr] = compute_disparity_scores(results_df, attr)
-            
-        # Stage 4: Gemini explanation
+
         sessions[session_id].update({"status": "generating_explanation", "progress": 75,
                      "stage_label": "Gemini 1.5 Pro drafting verdict..."})
         
         explanation = await generate_explanation(domain, disparity_results)
-        
-        # Stage 5: Build topology map data
+
         sessions[session_id].update({"status": "building_visualization", "progress": 90,
                      "stage_label": "Building bias topology map..."})
         await asyncio.sleep(0.5)
         
         topology_data = build_topology_data(disparity_results)
-        
-        # Finalize
+
         overall_severity = "none"
         if disparity_results:
              sev_ranks = {"none": 0, "low": 1, "moderate": 2, "high": 3, "critical": 4}
@@ -156,7 +146,6 @@ async def run_full_audit_pipeline(session_id: str, domain: str):
     except Exception as e:
         print(f"Pipeline failed: {e}")
         sessions[session_id].update({"status": "failed", "error": str(e), "progress": 100})
-
 
 def build_topology_data(disparity_results: dict) -> list:
     points = []

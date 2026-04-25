@@ -18,11 +18,11 @@ function replaceInFile(filePath, replacements) {
 }
 
 replaceInFile('components/BiasTopologyMap.tsx', [
-    ['critical: "#ef4444", // Red', 'critical: "#F5A0B5",'],
-    ['high: "#f97316",     // Orange', 'high: "#F5C888",'],
-    ['moderate: "#eab308", // Yellow', 'moderate: "#B8CCEE",'],
-    ['low: "#22c55e",      // Green', 'low: "#98D5B0",'],
-    ['none: "#6b7280"      // Gray', 'none: "#3A3A3A"'],
+    ['critical: "#ef4444", 
+    ['high: "#f97316",     
+    ['moderate: "#eab308", 
+    ['low: "#22c55e",      
+    ['none: "#6b7280"      
     [`      if (severity === "critical") {
         material.emissiveIntensity = 0.4 + Math.sin(state.clock.elapsedTime * 3 + x) * 0.3;
       } else if (hovered) {

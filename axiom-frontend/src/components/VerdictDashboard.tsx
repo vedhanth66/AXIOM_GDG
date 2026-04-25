@@ -60,7 +60,7 @@ export function VerdictDashboard({ data, onNext }: { data: any; onNext: () => vo
       transition={{ duration: 0.5 }}
       className="min-h-screen p-8 max-w-7xl mx-auto flex flex-col"
     >
-      {/* Header */}
+      
       <motion.header
         className="flex justify-between items-end mb-10"
         initial={{ opacity: 0, y: -10 }}
@@ -94,7 +94,7 @@ export function VerdictDashboard({ data, onNext }: { data: any; onNext: () => vo
         initial="hidden"
         animate="show"
       >
-        {/* Verdict Card */}
+        
         <motion.div
           className="glass-panel rounded-3xl p-8 border relative overflow-hidden group"
           style={sevBg}
@@ -132,7 +132,6 @@ export function VerdictDashboard({ data, onNext }: { data: any; onNext: () => vo
           </div>
         </motion.div>
 
-        {/* Disparity Chart */}
         <motion.div className="glass-panel rounded-3xl p-8 flex flex-col" variants={fadeUp}>
           <h3 className="text-lg font-medium mb-6 flex items-center gap-2 text-text-2">
             <Activity className="w-5 h-5 text-iris" />
@@ -177,7 +176,6 @@ export function VerdictDashboard({ data, onNext }: { data: any; onNext: () => vo
           </div>
         </motion.div>
 
-        {/* Impact Portrait */}
         <motion.div className="glass-panel rounded-3xl p-8 relative overflow-hidden" variants={fadeUp}>
           <div className="absolute left-0 top-0 bottom-0 w-1.5 rounded-full" style={{ background: "var(--theme-iris-bg)" }} />
           <h3 className="text-lg font-medium mb-4 flex items-center gap-2 text-iris">
@@ -190,7 +188,6 @@ export function VerdictDashboard({ data, onNext }: { data: any; onNext: () => vo
           </blockquote>
         </motion.div>
 
-        {/* Counterfactual Score */}
         <motion.div className="glass-panel rounded-3xl p-8 flex flex-col justify-center items-center text-center relative" variants={fadeUp}>
           <h3 className="text-text-3 font-medium mb-3 uppercase text-sm" style={{ fontFamily: MONO, letterSpacing: "0.15em", fontSize: "10px" }}>
             Counterfactual Fairness Score

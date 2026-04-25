@@ -1,9 +1,3 @@
-"""
-Uses Groq (Llama 3) to transform raw bias statistics into:
-1. A plain-English verdict (for the CEO / board)
-2. A specific remediation plan (for the engineering team)
-3. The "Impact Portrait"
-"""
 import os
 import json
 import asyncio
@@ -66,8 +60,7 @@ async def generate_explanation(domain: str, disparity_results: dict) -> dict:
         text = response.choices[0].message.content.strip()
         
         res = json.loads(text)
-        
-        # Normalize nested dictionaries to strings for frontend compatibility
+
         if isinstance(res.get("verdict"), dict):
             res["verdict"] = res["verdict"].get("text", str(res["verdict"]))
             
@@ -108,8 +101,8 @@ from aif360.algorithms.preprocessing import Reweighing
 from aif360.datasets import BinaryLabelDataset
 
 # 1. Define privileged and unprivileged groups
-privileged_groups = [{{"race": 1}}] # e.g. White
-unprivileged_groups = [{{"race": 0}}] # e.g. Black
+privileged_groups = [{ "race": 1} ] # e.g. White
+unprivileged_groups = [{ "race": 0} ] # e.g. Black
 
 # 2. Initialize Reweighing algorithm
 RW = Reweighing(unprivileged_groups=unprivileged_groups,
@@ -137,8 +130,7 @@ model.fit(dataset_transf_train.features,
             temperature=0.1
         )
         text = response.choices[0].message.content.strip()
-        
-        # Clean up markdown if the model still adds it
+
         if text.startswith("```"):
             lines = text.split("\n")
             if lines[0].startswith("```"):

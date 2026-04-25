@@ -34,7 +34,6 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-/* ── Dark (default) ── */
 :root {
   --theme-bg: #000000;
   --theme-surface: #111111;
@@ -85,7 +84,6 @@
   --theme-3d-fog: #000000;
 }
 
-/* ── Light ── */
 :root[data-theme='light'] {
   --theme-bg: #FAFAFA;
   --theme-surface: #FFFFFF;
@@ -172,13 +170,11 @@ body {
   opacity: 0.25;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--theme-border-2); border-radius: 999px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--theme-border-3); }
 
-/* Keyframes */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }
