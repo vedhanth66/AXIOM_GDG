@@ -1390,46 +1390,6 @@ Open an issue with:
 
 ---
 
-## 📄 License
-
-AXIOM is released under the **MIT License**.
-
-```
-MIT License
-
-Copyright (c) 2025 AXIOM Contributors
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
----
-
-## 🙏 Acknowledgements
-
-- **Groq** for blazing-fast Llama-3.1 inference that makes live code generation feel instant
-- **IBM AIF360** and **Microsoft Fairlearn** the fairness metric frameworks that AXIOM's remediation advice references
-- **Three.js** and **@react-three/fiber** for making interactive 3D in the browser actually achievable
-- **Framer Motion** for the silky-smooth animations that make the app feel alive
-- **DM Serif Display**, **Plus Jakarta Sans**, and **JetBrains Mono** from Google Fonts the typographic soul of AXIOM
-
----
-
 <div align="center">
 
 ```
