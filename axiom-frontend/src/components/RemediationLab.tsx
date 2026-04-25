@@ -39,7 +39,7 @@ export function RemediationLab({ explanation }: { explanation: any }) {
         setGeneratedCode(current);
       }
     } catch {
-      setGeneratedCode("# Error connecting to Gemini API.\n# Please check your network.");
+      setGeneratedCode("# Error connecting to AI Engine API.\n# Please check your network or API keys.");
     } finally {
       setIsGenerating(false);
     }
@@ -151,7 +151,7 @@ export function RemediationLab({ explanation }: { explanation: any }) {
           >
             <Terminal className="w-4 h-4 text-text-4" />
             <span className="text-text-3" style={{ fontFamily: MONO, fontSize: "12px" }}>
-              gemini-code-gen.py
+              ai-code-gen.py
             </span>
             {isGenerating && (
               <span className="ml-auto flex h-3 w-3 relative">

@@ -101,8 +101,8 @@ from aif360.algorithms.preprocessing import Reweighing
 from aif360.datasets import BinaryLabelDataset
 
 # 1. Define privileged and unprivileged groups
-privileged_groups = [{ "race": 1} ] # e.g. White
-unprivileged_groups = [{ "race": 0} ] # e.g. Black
+privileged_groups = [{{ "race": 1}} ] # e.g. White
+unprivileged_groups = [{{ "race": 0}} ] # e.g. Black
 
 # 2. Initialize Reweighing algorithm
 RW = Reweighing(unprivileged_groups=unprivileged_groups,
