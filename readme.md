@@ -186,7 +186,7 @@ Three fairness metrics are computed per protected attribute group:
 
 ### Step 4 LLM Explanation Engine
 
-Results are passed to an LLM (Groq/Llama-3.1-8b) with a structured three-part prompt that generates:
+Results are passed to an LLM (Gemini/Llama-3.1-8b) with a structured three-part prompt that generates:
 
 ```
 SECTION 1 VERDICT (for executives)
@@ -239,7 +239,7 @@ The result is an interactive, auto-rotating 3D landscape where bias literally to
 │                           │  └──────────────────────────┘│    │
 │                           │                               │    │
 │                           │  ┌──────────────────────────┐│    │
-│                           │  │     Groq Cloud API        ││    │
+│                           │  │     Gemini Cloud API        ││    │
 │                           │  │   Llama-3.1-8b-instant    ││    │
 │                           │  └──────────────────────────┘│    │
 │                           └───────────────────────────────┘    │
@@ -397,7 +397,7 @@ All transitions are animated with `transition: background-color 0.25s, border-co
 | **Pandas** | Latest | DataFrame operations |
 | **NumPy** | Latest | Numerical computing |
 | **scikit-learn** | Latest | ML utilities |
-| **Groq Python SDK** | Latest | LLM API client (Llama-3.1) |
+| **Gemini Python SDK** | Latest | LLM API client (Llama-3.1) |
 | **sse-starlette** | Latest | Server-Sent Events |
 | **python-multipart** | Latest | Form data parsing |
 | **python-dotenv** | Latest | Environment variables |
@@ -422,7 +422,7 @@ All transitions are animated with `transition: background-color 0.25s, border-co
 
 | Component | Technology |
 |-----------|-----------|
-| LLM Provider | Groq Cloud (Llama-3.1-8b-instant) |
+| LLM Provider | Gemini Cloud (Llama-3.1-8b-instant) |
 | Session Store | In-memory Python dict (hackathon-optimised) |
 | Real-time Updates | SSE (Server-Sent Events) |
 | Fonts | DM Serif Display, Plus Jakarta Sans, JetBrains Mono |
@@ -440,11 +440,11 @@ axiom/
 │   │   ├── persona_factory.py       # Synthetic persona generation (10k personas)
 │   │   ├── counterfactual.py        # Twin injection + model probing
 │   │   ├── disparity.py             # Fairness metric computation
-│   │   └── gemini_explainer.py      # LLM verdict + code generation (Groq)
+│   │   └── gemini_explainer.py      # LLM verdict + code generation (Gemini)
 │   │
 │   ├── main.py                      # FastAPI app + all endpoints + pipeline orchestrator
 │   ├── requirements.txt             # Python dependencies
-│   └── .env                         # GROQ_API_KEY (you create this)
+│   └── .env                         # Gemini_API_KEY (you create this)
 │
 ├── 📁 axiom-frontend/
 │   ├── 📁 public/
@@ -498,8 +498,8 @@ node --version      # Needs 20.19+ or 22.12+
 npm --version       # Needs 10+
 ```
 
-You'll also need a **Groq API key** (free tier available):
-→ https://console.groq.com/keys
+You'll also need a **Gemini API key** (free tier available):
+→ https://console.Gemini.com/keys
 
 ### 1. Clone the Repository
 
@@ -534,13 +534,13 @@ Create your environment file:
 touch .env
 ```
 
-Add your Groq API key to `.env`:
+Add your Gemini API key to `.env`:
 
 ```env
-GROQ_API_KEY=gsk_your_groq_api_key_here
+Gemini_API_KEY=gsk_your_Gemini_api_key_here
 ```
 
-> **Note:** AXIOM works without a Groq API key it falls back to pre-written example outputs for the verdict, remediation steps, impact portrait, and code snippets. The 3D map and all metrics still function perfectly.
+> **Note:** AXIOM works without a Gemini API key it falls back to pre-written example outputs for the verdict, remediation steps, impact portrait, and code snippets. The 3D map and all metrics still function perfectly.
 
 Start the backend server:
 
@@ -787,7 +787,7 @@ DI Ratio ≥ 0.90  →  "low"
 | `generate_explanation` | `async (domain, disparity_results) → dict` | Generates verdict + portrait + remediation |
 | `generate_code_fix` | `async (finding, approach) → str` | Generates remediation Python code |
 
-Both functions include **graceful fallback** to pre-written example content when the Groq API is unavailable.
+Both functions include **graceful fallback** to pre-written example content when the Gemini API is unavailable.
 
 ---
 
@@ -990,7 +990,7 @@ Here is the complete end-to-end data flow in detail:
    
    ╔══ STAGE 4: LLM EXPLANATION ══════════════════════╗
    ║  Build prompt with domain + all metrics JSON     ║
-   ║  POST to Groq API (llama-3.1-8b-instant)         ║
+   ║  POST to Gemini API (llama-3.1-8b-instant)         ║
    ║  Parse JSON response with 3 sections             ║
    ║  Normalise any nested dict structures            ║
    ║  → explanation: { verdict, remediation, portrait}║
@@ -1131,7 +1131,7 @@ def mock_biased_model_probe(persona: dict) -> dict:
 
 ### Changing the LLM
 
-In `gemini_explainer.py`, swap the Groq client for any OpenAI-compatible client:
+In `gemini_explainer.py`, swap the Gemini client for any OpenAI-compatible client:
 
 ```python
 # Using OpenAI
