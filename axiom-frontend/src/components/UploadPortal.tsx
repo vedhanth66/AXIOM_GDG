@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { UploadCloud, ShieldAlert, Cpu, HeartPulse, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { UploadCloud, ShieldAlert, Cpu, HeartPulse, Sparkles, CheckCircle2 } from "lucide-react";
+import { useState, useRef } from "react";
 
 const SERIF = "'DM Serif Display', serif";
 const MONO = "'JetBrains Mono', monospace";
@@ -17,13 +17,21 @@ const protectedAttrs = [
   { name: "Age Group", color: "var(--theme-mint)" },
 ];
 
-export function UploadPortal({ onStart }: { onStart: (domain: string) => void }) {
+export function UploadPortal({ onStart }: { onStart: (domain: string, file: File | null) => void }) {
   const [domain, setDomain] = useState("hiring");
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleStart = () => {
     setIsLoading(true);
-    onStart(domain);
+    onStart(domain, selectedFile);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
   };
 
   return (
@@ -76,24 +84,40 @@ export function UploadPortal({ onStart }: { onStart: (domain: string) => void })
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           
           <motion.div
-            className="border border-dashed rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer group"
+            className="border border-dashed rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer group relative"
             style={{
-              borderColor: "var(--theme-border-2)",
+              borderColor: selectedFile ? "var(--theme-mint)" : "var(--theme-border-2)",
               background: "var(--theme-tag-bg)",
             }}
-            whileHover={{ borderColor: "var(--theme-iris)", scale: 1.01 }}
+            whileHover={{ borderColor: selectedFile ? "var(--theme-mint)" : "var(--theme-iris)", scale: 1.01 }}
             transition={{ duration: 0.2 }}
+            onClick={() => fileInputRef.current?.click()}
           >
+            <input 
+              type="file" 
+              accept=".csv" 
+              className="hidden" 
+              ref={fileInputRef}
+              onChange={handleFileChange}
+            />
             <motion.div
               className="p-4 rounded-full mb-4"
               style={{ background: "var(--theme-surface-2)" }}
               whileHover={{ scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <UploadCloud className="w-10 h-10 text-iris" />
+              {selectedFile ? (
+                <CheckCircle2 className="w-10 h-10 text-mint" />
+              ) : (
+                <UploadCloud className="w-10 h-10 text-iris" />
+              )}
             </motion.div>
-            <h3 className="text-lg font-normal text-text-primary mb-1">Connect Data</h3>
-            <p className="text-sm text-text-3 font-light">Drag & drop your CSV or connect live model endpoint.</p>
+            <h3 className="text-lg font-normal text-text-primary mb-1">
+              {selectedFile ? "Data Connected" : "Connect Data"}
+            </h3>
+            <p className="text-sm text-text-3 font-light">
+              {selectedFile ? "CSV dataset successfully parsed." : "Drag & drop your CSV or click to browse."}
+            </p>
             <div
               className="mt-6 px-4 py-2 rounded-full text-text-3 flex items-center gap-2"
               style={{
@@ -103,8 +127,8 @@ export function UploadPortal({ onStart }: { onStart: (domain: string) => void })
                 fontSize: "11px",
               }}
             >
-              <span className="w-2 h-2 rounded-full bg-mint animate-pulse" />
-              COMPAS Demo Dataset Loaded
+              <span className={`w-2 h-2 rounded-full ${selectedFile ? "bg-mint animate-pulse" : "bg-iris animate-pulse"}`} />
+              {selectedFile ? selectedFile.name : "COMPAS Demo Dataset Loaded"}
             </div>
           </motion.div>
 

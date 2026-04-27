@@ -31,10 +31,13 @@ function App() {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const handleStartAudit = async (domain: string) => {
+  const handleStartAudit = async (domain: string, file: File | null) => {
     try {
       const formData = new FormData();
       formData.append("domain", domain);
+      if (file) {
+        formData.append("file", file);
+      }
       const res = await fetch("/api/audit/start", {
         method: "POST",
         body: formData
