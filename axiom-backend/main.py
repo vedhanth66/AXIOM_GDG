@@ -1,5 +1,7 @@
 from fastapi import FastAPI, UploadFile, File, BackgroundTasks, Form
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from sse_starlette.sse import EventSourceResponse
 import pandas as pd
 import uuid
@@ -163,6 +165,16 @@ def build_topology_data(disparity_results: dict) -> list:
                 "severity": results["overall_bias_severity"]
             })
     return points
+
+# Optional: define a root fallback for SPA
+@app.get("/{catchall:path}")
+async def serve_spa(catchall: str):
+    if catchall.startswith("api/"):
+        return {"error": "API route not found"}
+    frontend_dir = os.path.join(os.path.dirname(__file__), "..", "axiom-frontend", "dist")
+    if os.path.exists(os.path.join(frontend_dir, catchall)) and catchall != "":
+        return FileResponse(os.path.join(frontend_dir, catchall))
+    return FileResponse(os.path.join(frontend_dir, "index.html"))
 
 if __name__ == "__main__":
     import uvicorn
