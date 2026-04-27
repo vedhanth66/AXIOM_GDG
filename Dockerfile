@@ -8,17 +8,23 @@ RUN npm run build
 
 # Stage 2: Setup Python backend and serve
 FROM python:3.10-slim
+
+# Create user with UID 1000 required by Hugging Face Spaces
+RUN useradd -m -u 1000 user
+USER user
+ENV PATH="/home/user/.local/bin:$PATH"
+
 WORKDIR /app
 
 # Copy backend requirements and install
-COPY axiom-backend/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY --chown=user axiom-backend/requirements.txt .
+RUN pip install --user --no-cache-dir -r requirements.txt
 
 # Copy backend code
-COPY axiom-backend /app/axiom-backend
+COPY --chown=user axiom-backend /app/axiom-backend
 
 # Copy the built frontend from Stage 1
-COPY --from=frontend-builder /app/frontend/dist /app/axiom-frontend/dist
+COPY --chown=user --from=frontend-builder /app/frontend/dist /app/axiom-frontend/dist
 
 # Expose port 7860 for Hugging Face Spaces
 EXPOSE 7860
