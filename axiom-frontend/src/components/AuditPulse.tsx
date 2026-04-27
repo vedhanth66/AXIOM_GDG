@@ -21,7 +21,7 @@ export function AuditPulse({ sessionId, onComplete }: { sessionId: string; onCom
   const [flipCount, setFlipCount] = useState(0);
 
   useEffect(() => {
-    const es = new EventSource(`http://localhost:8000/api/audit/${sessionId}/stream`);
+    const es = new EventSource(`/api/audit/${sessionId}/stream`);
     es.onmessage = (e) => {
       const data = JSON.parse(e.data);
       setProgress(data.progress);

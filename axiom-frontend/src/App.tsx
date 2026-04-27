@@ -35,7 +35,7 @@ function App() {
     try {
       const formData = new FormData();
       formData.append("domain", domain);
-      const res = await fetch("http://localhost:8000/api/audit/start", {
+      const res = await fetch("/api/audit/start", {
         method: "POST",
         body: formData
       });

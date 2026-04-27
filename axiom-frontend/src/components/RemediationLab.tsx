@@ -25,7 +25,7 @@ export function RemediationLab({ explanation }: { explanation: any }) {
       formData.append("finding", explanation.verdict);
       formData.append("approach", fix);
 
-      const res = await fetch("http://localhost:8000/api/audit/fix", {
+      const res = await fetch("/api/audit/fix", {
         method: "POST",
         body: formData,
       });
