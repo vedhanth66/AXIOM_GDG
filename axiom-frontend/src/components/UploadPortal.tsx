@@ -21,6 +21,7 @@ export function UploadPortal({ onStart }: { onStart: (domain: string, file: File
   const [domain, setDomain] = useState("hiring");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleStart = () => {
@@ -28,6 +29,28 @@ export function UploadPortal({ onStart }: { onStart: (domain: string, file: File
     onStart(domain, selectedFile);
   };
 
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      const file = e.dataTransfer.files[0];
+      if (file.name.toLowerCase().endsWith('.csv')) {
+        setSelectedFile(file);
+      } else {
+        alert("Please upload a CSV file.");
+      }
+    }
+  };
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedFile(e.target.files[0]);
@@ -84,14 +107,17 @@ export function UploadPortal({ onStart }: { onStart: (domain: string, file: File
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           
           <motion.div
-            className="border border-dashed rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer group relative"
+            className={`border border-dashed rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer group relative transition-colors ${isDragging ? 'bg-white/5' : ''}`}
             style={{
-              borderColor: selectedFile ? "var(--theme-mint)" : "var(--theme-border-2)",
-              background: "var(--theme-tag-bg)",
+              borderColor: isDragging ? "var(--theme-iris)" : (selectedFile ? "var(--theme-mint)" : "var(--theme-border-2)"),
+              background: isDragging ? "color-mix(in srgb, var(--theme-iris) 10%, transparent)" : "var(--theme-tag-bg)",
             }}
             whileHover={{ borderColor: selectedFile ? "var(--theme-mint)" : "var(--theme-iris)", scale: 1.01 }}
             transition={{ duration: 0.2 }}
             onClick={() => fileInputRef.current?.click()}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
           >
             <input 
               type="file" 
